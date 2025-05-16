@@ -70,8 +70,12 @@ def get_date(message):
 def last_city(message):
     with open("last_city.txt", 'r', encoding='utf-8') as f:  # открывает тхтшник
         data = f.readlines()  # считывает
-    txt = f'Последний город, температуру по которому вы запрашивали - {data[0]}'
-    bot.send_message(message.from_user.id, txt)
+    try:
+        txt = f'Последний город, температуру по которому вы запрашивали - {data[0]}'
+        bot.send_message(message.from_user.id, txt)
+    except Exception:
+        txt = f'Вы ещё не запрашивали никаких городов'
+        bot.send_message(message.from_user.id, txt)
 
 
 # обрабатываем любой текстовый запрос
